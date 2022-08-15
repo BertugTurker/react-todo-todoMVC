@@ -14,7 +14,6 @@ function Todoes() {
         input: "jojo",
       }
     ]);
-    //const [items, setItems] = useState(todos.length);
   
     useEffect(()=> {
       console.log(todos);
