@@ -1,51 +1,55 @@
 import { useState } from "react";
 
-function List({ addTodos, todos, form, setForm }) {
+function List({ addTodos, todos }) {
 
   const [name, setName] = useState("");
-  const [todosnew, setTodosnew] = useState(todos)
-
-  const checkTodo = (e) => {
-    e.target.parentElement.parentElement.className === "a" ? e.target.parentElement.parentElement.className="completed" : e.target.parentElement.parentElement.className= "a";
-    
+  const [isCompleted, setIsCompleted] = useState("")
+  
+  const checkTodo = () => {
+    isCompleted === "" ? setIsCompleted("completed") : setIsCompleted("") 
   }
 
   const deleteTodo = (e) => {
-     e.target.closest('.main').remove()
+    addTodos(todos.filter(item=> item.input!==e.target.closest('.view').innerText));
   }
 
+  
+
   const changeTheName = (e) => {
-    setName(e.target.value)
+    setName(e.target.value);
+    
   }
 
   const submitEditedName = (e) => {
     
     e.target.parentElement.className= "a";
-    // setForm({...form, input: name});
+    let newArr = [...todos];
+    newArr[e.target.parentElement.id].input = name;
+
+    addTodos(newArr);
+  }
   
-    
-    // addTodos([...todos, form]);
-    
-    setTodosnew([...todosnew, todosnew[e.target.parentElement.id].input= name])
-    console.log(todosnew)
-    
+
+  const doubleDouble = (e) => {
+    setName(e.target.closest('.view').innerText);
+    e.target.parentElement.parentElement.className="editing"
   }
 
 
   return (
     <ul className="todo-list">
         {
-          todosnew.map((c, i)=> ( 
-            <div className="main">
-                <li key={i} id={i} className="a" >
+          todos.map((c, i)=> ( 
+            <div className="main" key={i}>
+                <li key={i} id={i} className={isCompleted} >
                   <div className="view">
-                  <input type="checkbox" className="toggle" id={todosnew.id} onClick={checkTodo}/>
-                  <label onDoubleClick={(e)=> e.target.parentElement.parentElement.className="editing"}>
-                  {c.input}
-                  </label>
-                  <button className="destroy" id={todosnew.id} onClick={deleteTodo}></button>
+                      <input type="checkbox" className="toggle" id={todos.id} onClick={checkTodo}/>
+                      <label onDoubleClick={doubleDouble}>
+                        {c.input}
+                      </label>
+                      <button className="destroy" id={todos.id} onClick={deleteTodo}></button>
                   </div>
-                  <input className="edit" value={name} onBlur={submitEditedName} onChange={changeTheName}/>
+                  <input name="edit" className="edit" autoComplete="off" value={name} onBlur={submitEditedName} onChange={changeTheName}/>
                 </li>
             </div>
           ))

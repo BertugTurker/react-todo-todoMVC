@@ -34,6 +34,7 @@ function Form({ addTodos, todos }) {
     <div >
       <input
       className="new-todo"
+      autoComplete="off"
       name='input'
       placeholder='yapilacak'
       value={form.input}

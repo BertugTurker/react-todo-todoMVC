@@ -31,7 +31,7 @@ function Todoes() {
             
             
 
-            <List todos={todos} />
+            <List addTodos={setTodos} todos={todos} />
             
             <Footer todos={todos}/>
            
