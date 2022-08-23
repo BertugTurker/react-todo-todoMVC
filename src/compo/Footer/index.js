@@ -3,15 +3,14 @@
 function Footer({ addTodos, todos }) {
 
     const deleteAll = (e) => {
-        addTodos(todos.filter(item=> item.input !== (e.target.parentElement.parentElement.className = "completed").innerText))
+        addTodos(todos.filter(item => item.isCompleted === false))
     }
 
     return (
         <footer className="footer">
-            <meta property="todoDone" content="[count(todo where done)]"/>
-            <meta property="todoLeft" content="[count(todo where !done)]"/>
             
-            <span className='todo-count'>{todos.length} madde kaldi</span>
+            
+            <span className='todo-count'>{todos.filter(item => item.isCompleted === false).length} madde kaldi</span>
             
             <ul className="filters">
                 <li>

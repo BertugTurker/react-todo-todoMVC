@@ -8,10 +8,13 @@ function Todoes() {
     const [todos, setTodos] = useState([
       {
         input: "bert",
+        isCompleted: true,
       }, {
         input: "tugba",
+        isCompleted: true,
       }, {
         input: "jojo",
+        isCompleted: false,
       }
     ]);
   
@@ -20,23 +23,14 @@ function Todoes() {
     }, [todos])
   
     return (
-      <div className='todoapp'>
-            
-              <header className='header'>
-              <h1>todos</h1>
-              <Form addTodos={setTodos} todos={todos}/>
-              </header>
-            
+      <div className='todoapp'>    
+        <header className='header'>
+        <h1>todos</h1>
+          <Form addTodos={setTodos} todos={todos}/>
+        </header>
 
-            
-            
-
-            <List addTodos={setTodos} todos={todos} />
-            
-            <Footer todos={todos}/>
-           
-
-            
+          <List addTodos={setTodos} todos={todos}/>
+          <Footer todos={todos} addTodos={setTodos}/>  
       </div>
     )
   }

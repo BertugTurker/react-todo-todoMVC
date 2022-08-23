@@ -1,20 +1,16 @@
 import { useState, useEffect } from "react";
 
-
 const initialFormValues = { input: ""};
+
 function Form({ addTodos, todos }) {
   const [form, setForm] = useState(initialFormValues);
   
-
   useEffect(()=> {
     setForm(initialFormValues);
-    
   }, [todos]);
 
   const onChangeInput = (e) => {
-    
-    setForm({...form, [e.target.name]: e.target.value})
-    
+    setForm({...form, input: e.target.value, isCompleted: false})
   };
 
   const onSubmit = (e) => {
@@ -25,8 +21,6 @@ function Form({ addTodos, todos }) {
     };
     
     addTodos([...todos, form]);
-
-    
   };
 
   return (
@@ -40,10 +34,6 @@ function Form({ addTodos, todos }) {
       value={form.input}
       onChange={onChangeInput}/>
     </div>
-    <div>
-      <button></button>
-    </div>
-    
   </form>
   );
 }
