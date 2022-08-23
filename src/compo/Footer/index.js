@@ -6,6 +6,17 @@ function Footer({ addTodos, todos }) {
         addTodos(todos.filter(item => item.isCompleted === false))
     }
 
+    let clearButton = null;
+    if (todos.filter(item => item.isCompleted === true).length > 0) {
+        clearButton = (
+            <button
+                className="clear-completed"
+                onClick={deleteAll}>
+                bitenleri sil
+            </button>
+        );
+    }
+
     return (
         <footer className="footer">
             
@@ -23,8 +34,7 @@ function Footer({ addTodos, todos }) {
                     <a href="#/completed" className="" id="completed">Completed</a>
                 </li>
             </ul>
-            
-            <button className="clear-completed" onClick={deleteAll}>bitenleri sil</button>
+            {clearButton}
     </footer>
     )
 }
