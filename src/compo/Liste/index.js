@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function List({ addTodos, todos }) {
+function List({ addTodos, todos, todoFilter }) {
 
   const [name, setName] = useState("");
   
@@ -36,12 +36,18 @@ function List({ addTodos, todos }) {
   const doubleDouble = (e) => {
     setName(e.target.closest('.view').innerText);
     e.target.parentElement.parentElement.className="editing";
+    e.target.parentElement.parentElement.lastChild.focus();
   }
 
   return (
     <ul className="todo-list">
         {
-          todos.map((c, i)=> ( 
+          (todoFilter === 0 
+            ? todos
+            : (todoFilter === 1 
+              ? (todos.filter(element=> element.isCompleted === false))
+              : (todos.filter(element=> element.isCompleted === true))
+              )).map((c, i)=> ( 
             <div className="main" key={i}>
                 <li key={i} id={i} className={c.isCompleted === true ? "completed" : ""}>
                   <div className="view">
@@ -51,7 +57,7 @@ function List({ addTodos, todos }) {
                       </label>
                       <button className="destroy" id={todos.id} onClick={deleteTodo}></button>
                   </div>
-                  <input name="edit" className="edit" autoComplete="off" value={name} onBlur={submitEditedName} onChange={changeTheName} autoFocus />
+                  <input name="edit" className="edit" autoComplete="off" value={name} onBlur={submitEditedName} onChange={changeTheName}/>
                 </li>
             </div>
           ))

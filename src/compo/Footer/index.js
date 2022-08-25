@@ -1,8 +1,6 @@
+function Footer({ addTodos, todos, todoFilter, setTodoFilter }) {
 
-
-function Footer({ addTodos, todos }) {
-
-    const deleteAll = (e) => {
+    const deleteAll = () => {
         addTodos(todos.filter(item => item.isCompleted === false))
     }
 
@@ -12,26 +10,42 @@ function Footer({ addTodos, todos }) {
             <button
                 className="clear-completed"
                 onClick={deleteAll}>
-                bitenleri sil
+                remove completed
             </button>
-        );
+        )
     }
+    let things=""
+    if (todos.filter(item => item.isCompleted === false).length === 1) {
+        things = ("thing to do")
+    } else things = ("things to do")
 
     return (
         <footer className="footer">
-            
-            
-            <span className='todo-count'>{todos.filter(item => item.isCompleted === false).length} madde kaldi</span>
-            
+            <span className='todo-count'>{todos.filter(item => item.isCompleted === false).length} {things}</span>
             <ul className="filters">
                 <li>
-                    <a href="#/" className="" id="all">All</a>
+                    <a
+                    href="#/"
+                    id="all"
+                    onClick={()=>{setTodoFilter(0)}}
+                    className={todoFilter === 0 ? "selected" : null}
+                    >all</a>
                 </li>
                 <li>
-                    <a href="#/active" className="" id="active">Active</a>
+                    <a
+                    href="#/active"
+                    id="active"
+                    onClick={()=>{setTodoFilter(1)}}
+                    className={todoFilter === 1 ? "selected" : null}
+                    >active</a>
                 </li>
                 <li>
-                    <a href="#/completed" className="" id="completed">Completed</a>
+                    <a
+                    href="#/completed"
+                    id="completed"
+                    onClick={()=>{setTodoFilter(61)}}
+                    className={todoFilter === 2 ? "selected" : null}
+                    >completed</a>
                 </li>
             </ul>
             {clearButton}

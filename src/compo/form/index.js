@@ -6,7 +6,7 @@ function Form({ addTodos, todos }) {
   const [form, setForm] = useState(initialFormValues);
   
   useEffect(()=> {
-    setForm(initialFormValues);
+    setForm(initialFormValues)
   }, [todos]);
 
   const onChangeInput = (e) => {
@@ -21,16 +21,16 @@ function Form({ addTodos, todos }) {
     };
     
     addTodos([...todos, form]);
-  };
+  }
 
   return (
     <form onSubmit={onSubmit}>
-    <div >
+    <div>
       <input
       className="new-todo"
       autoComplete="off"
       name='input'
-      placeholder='yapilacak'
+      placeholder='do something!'
       value={form.input}
       onChange={onChangeInput}/>
     </div>
