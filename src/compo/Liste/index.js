@@ -26,7 +26,7 @@ function List({ addTodos, todos, todoFilter }) {
   const submitEditedName = (e) => {
     let newArr = [...todos];
     newArr[e.target.parentElement.id].input = name;
-    addTodos(newArr);
+    addTodos(newArr.filter((e)=> e.input !== ""));
     
     newArr[e.target.parentElement.id].isCompleted === true ?
     e.target.parentElement.className = "completed" :
